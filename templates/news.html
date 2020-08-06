@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1> CampComm </h1>
+<p>What would you like to know?</p>
+
+<hr/>
+
+<form action="news-query" method="get">
+    <input type="text" id="newstext" name="news"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+<p>{{ message }}</p>
+{% endblock %}
