@@ -2,9 +2,11 @@ from flask import Flask
 from flask import render_template, request, redirect
 from playsound import playsound
 from gtts import gTTS
+import Chatbot
+import os
 app = Flask(__name__)
 
-voice = False
+voice = True
 
 @app.route('/')
 def landing():
@@ -16,15 +18,18 @@ def landing():
 
 @app.route('/home')
 def home():
-    playsound("action_query.mp3")
-    playsound("one_prob.mp3")
-    playsound("two_news.mp3")
-    playsound("three_survey.mp3")
+    if voice == True:
+        playsound("action_query.mp3")
+        playsound("one_prob.mp3")
+        playsound("two_news.mp3")
+        playsound("three_survey.mp3")
     return render_template('home.html')
 
 @app.route('/news')
 def news():
-    return "I Don't have any news yet"
+    if voice == True:
+        pass
+    return render_template("news.html")
 
 @app.route('/report')
 def report():
@@ -32,6 +37,8 @@ def report():
 
 @app.route('/survey')
 def survey():
+    if voice == True:
+        pass
     return render_template('survey.html')
 
 @app.route('/vot')
@@ -58,13 +65,26 @@ def language_query():
         return redirect("/vot")
     return "Not Understood"
 
+@app.route('/news-query')
+def news_query():
+    answer = request.args.get('news')
+    info = Chatbot.recenews(answer)
+    if voice == True:
+        tts = gTTS(text=info)
+        tts.save("news_answer.mp3")
+        playsound("news_answer.mp3")
+        os.remove("news_answer.mp3")
+    return render_template("news.html", message=info)
 
 @app.route('/vot-query')
 def vot_query():
+    global voice
+    voice = True
     answer = request.args.get('vot')
     if answer == "1":
-        return "W.I.P"
+        return redirect("/home")
     elif answer == "2":
+        voice = False
         return redirect("/home")
     else:
         return "Sorry I don't understand"
@@ -73,15 +93,18 @@ def vot_query():
 def report_query():
     # WARNING: NOT SECURE!!!
     answer = request.args.get('answer')
-    return f'thank you for your report that "{answer}"'
+    speak = 'Thank you for your report that ' +answer
+    if voice == True:
+        tts = gTTS(speak)
+        tts.save("report.mp3")
+        playsound("report.mp3")
+        os.remove("report.mp3")
+    return f'Thank you for your report that "{answer}"'
 
 @app.route('/survey-query')
 def survey_query():
     # WARNING: NOT SECURE!!!
-    answer1 = request.args.get('answer1')
-    answer2 = request.args.get('answer2')
-    return f'you submitted "{answer1}" in response to the first question \
-             and "{answer2}" in response to the second question.'
+    return redirect("/home")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

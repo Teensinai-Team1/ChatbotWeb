@@ -33,7 +33,6 @@ remove_punct = dict((ord(punct), None) for punct in string.punctuation)
 def LemNormalize(text):
     return LemTokens(nltk.word_tokenize(text.lower().translate(remove_punct)))
 
-#Text to speech will go here
 
 
 #Greeting database
@@ -68,56 +67,20 @@ def respond(user_input):
 
 #Program
 
-running = True
-print(hello)
-voice_or_text = input("""Push '1' to enter in text or '2' to use speech: """)
-
-reports = list()
-
-while running:
-    print("")
-    print(push_one)
-    playsound("push_one.mp3")
-    print(push_two)
-    playsound("push_two.mp3")
-    print(push_three)
-    playsound("push_three.mp3")
-    
-    if voice_or_text == '2':
-        user_input = str()
-        get_audio()
-        user_input = user_input.lower()
-    elif voice_or_text == '1':
-        user_input = input().lower()
-        
-    if user_input != "bye":
-        if user_input == "thanks" or user_input == "thank you":
-            running = False
-            print("""Bot: You're welcome""")
+def recenews(user_input):
+        if user_input != "bye":
+            if user_input == "thanks" or user_input == "thank you":
+                running = False
+                return """Bot: You're welcome"""
             
-        elif user_input == "1" or user_input == "report":
-            playsound("issue.mp3")
-            myreport = input("Please describe the issue: ")
-            reports.append(myreport)
-            print("Thank you for the feedback. The authorities will be informed that: %s and will be acted upon" %myreport)
-        elif user_input == "2" or user_input == "info":
-            playsound("askany.mp3")
-            question = input("Please ask anything about the camp: ").lower()
-            if greeting(question) != None:
-                print("Chatbot: "+ greeting(user_input))
             else:
-                print("Chatbot: ", end="")
-                print(respond(question))
-                sent_tokens.remove(question)
-        elif user_input == "3" or user_input == "survey":
-            print("Work in Progress")
+                if greeting(user_input) != None:
+                    return "Chatbot: "+ greeting(user_input)
+                else:
+                    print("Chatbot: ", end="")
+                    res = respond(user_input)
+                    sent_tokens.remove(user_input)
+                    return res
         else:
-            if greeting(user_input) != None:
-                print("Chatbot: "+ greeting(user_input))
-            else:
-                print("Chatbot: ", end="")
-                print(respond(user_input))
-                sent_tokens.remove(user_input)
-    else:
-        running = False
-        print("Chatbot: Bye, have a nice day.")
+            running = False
+            print("Chatbot: Bye, have a nice day.")
