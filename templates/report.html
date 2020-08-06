@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1> report </h1>
+report a problem
+
+<form action="report-query" method="get">
+    what is the problem?
+    <input type="text" id="answertext" name="answer"/>
+    <input type="submit" value="Submit"/>
+</form>
+{% endblock %}

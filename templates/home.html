@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1> CampComm </h1>
+<p>What would you like to do today?</p>
+
+<hr/>
+
+<form action="home-query" method="get">
+    <p>Press or say 1 to report a problem.</p>
+    <p>Press or say 2 to get the latest news.</p>
+    <p>Press or say 3 to take the latest survey</p>
+    <input type="text" id="lantext" name="todo"/>
+    <input type="submit" value="Submit"/>
+</form>
+{% endblock %}

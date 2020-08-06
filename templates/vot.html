@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1> Welcome to CampComm </h1>
+What method would you want to continue with?
+
+<hr/>
+
+<form action="vot-query" method="get">
+    <p>Press or say 1 to use voice.</p>
+    <p>Press or say 2 to use text.</p>
+    <input type="text" id="lantext" name="vot"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+{% endblock %}
