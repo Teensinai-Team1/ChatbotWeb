@@ -3,8 +3,18 @@
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
 </head>
 
-<img src="Screenshot_2020-08-03_at_15.05.16.png" alt="Logo">
+<img src="static/Screenshot_2020-08-03_at_15.05.16.png" alt="Logo">
 
 <body>
+    <audio src= {{ sound }} id="narr"></audio>
+    {% if voice %}
+    <script type="text/javascript">
+        window.onload = function(){
+            document.getElementById("narr").play()
+        }
+    {% endif %}
     {% block body %} {% endblock %}
+
+<script async src="static/main.js"></script>
+<video></video>
 </body>

@@ -10,47 +10,38 @@ voice = True
 
 @app.route('/')
 def landing():
-    playsound("Welcome.mp3")
-    playsound("lang_query.mp3")
-    playsound("one_en.mp3")
-    #playsound("two_swa.mp3")
-    return render_template('index.html')
+    sound = "static/welcome_audio.mp3"
+    return render_template('index.html', sound=sound, voice=voice)
 
 @app.route('/home')
 def home():
-    if voice == True:
-        playsound("action_query.mp3")
-        playsound("one_prob.mp3")
-        playsound("two_news.mp3")
-        playsound("three_survey.mp3")
-    return render_template('home.html')
+    sound = "static/pronewsur.mp3"
+    return render_template('home.html', sound=sound, voice=voice)
 
 @app.route('/news')
 def news():
     if voice == True:
         pass
-    return render_template("news.html")
+    return render_template("news.html", sound=sound, voice=voice)
 
 @app.route('/report')
 def report():
-    return render_template('report.html')
+    return render_template('report.html', sound=sound, voice=voice)
 
 @app.route('/survey')
 def survey():
     if voice == True:
         pass
-    return render_template('survey.html')
+    return render_template('survey.html', sound=sound, voice=voice)
 
 @app.route('/vot')
 def vot():
-    playsound("method_query.mp3")
-    playsound("one_voice.mp3")
-    playsound("two_text.mp3")
-    return render_template('vot.html')
+    sound = "static/voice_or_text.mp3"
+    return render_template('vot.html', sound=sound, voice=voice)
 
 @app.route("/home-query")
 def home_query():
-    answer = request.args.get('todo')
+    answer = request.args.get('todo') 
     if answer == "1":
         return redirect("/report")
     elif answer == "2":
