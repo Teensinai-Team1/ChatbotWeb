@@ -1,9 +1,5 @@
 from flask import Flask
 from flask import render_template, request, redirect
-from playsound import playsound
-from gtts import gTTS
-import Chatbot
-import os
 app = Flask(__name__)
 
 voice = True
@@ -84,12 +80,6 @@ def vot_query():
 def report_query():
     # WARNING: NOT SECURE!!!
     answer = request.args.get('answer')
-    speak = 'Thank you for your report that ' +answer
-    if voice == True:
-        tts = gTTS(speak)
-        tts.save("report.mp3")
-        playsound("report.mp3")
-        os.remove("report.mp3")
     return f'Thank you for your report that "{answer}"'
 
 @app.route('/survey-query')
@@ -98,4 +88,4 @@ def survey_query():
     return redirect("/home")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(debug=True)
