@@ -1,13 +1,13 @@
 <head>
     <title>CampComm</title>
-    <link rel="stylesheet" type="text/css" href="static/css/main.css">
-    <!--<script type="text/javascript" src="static/js/main.js"></script>-->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
 </head>
 
 <body>
     <img src="static/Screenshot_2020-08-03_at_15.05.16.png" alt="Logo">
     <audio src={{ sound }} id="narr"></audio>        
     {% block body %} {% endblock %}
+    <script type="text/javascript" src="{{ url_for('static', filename=('js/main.js')) }}"></script>
     <button id='btnGiveCommand'>&#127908;</button>
     <br><br>
     <span id='message'></span>
@@ -67,5 +67,9 @@
 
 
     </script>
+    
+<footer>
+    <script type="text/javascript">!function(t,e){t.artibotApi={l:[],t:[],on:function(){this.l.push(arguments)},trigger:function(){this.t.push(arguments)}};var a=!1,i=e.createElement("script");i.async=!0,i.type="text/javascript",i.src="https://app.artibot.ai/loader.js",e.getElementsByTagName("head").item(0).appendChild(i),i.onreadystatechange=i.onload=function(){if(!(a||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState)){new window.ArtiBot({i:"20229bd8-2732-4a13-8e7a-498a3d4fc225"});a=!0}}}(window,document);</script>
+</footer>
     
 </body>

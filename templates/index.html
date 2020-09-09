@@ -6,11 +6,32 @@ What language would you want to continue with?
 
 <hr/>
 
-<form id="myForm" action="language-query" method="get">
-    <h3>1 English.</h3>
-    <h3>2 Kiswahili.</h3>
+
+<!--Pop Up-->
+
+<a href="#" id="button">Click</a>
+<button id="register">Register</button>
+
+<div class="bg-modal report">
+    <div class="close">+</div>
+    <div class="content-modal">
+        <form>
+            <input type="text" placeholder="Report here">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="content-modal">
+        <form>
+            <input type="text" placeholder="Camp Name">
+            <input type="email" placeholder="contactemail@gmail.com">
+            <input type="tel" placeholder="+1-******">
+            <input type="password">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
     
-    <input class="myInput" type="text" id="lantext" name="ling"/>
-    <input type="submit" value="&#10004;"/>
-</form>
+</div>
+
+
+
 {% endblock %}
