@@ -1,16 +1,292 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<title>CampComm</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/home.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
-{% block body %}
-<h1> CampComm </h1>
-<p>What would you like to do today?</p>
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
 
-<hr/>
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("https://live.staticflickr.com/5606/15592147525_6fa93c2484_b.jpg");
+  min-height: 100%;
+}
 
-<form class="myForm" action="home-query" method="get">
-    <p>Press or say 1 to report a problem.</p>
-    <p>Press or say 2 to get the latest news.</p>
-    <p>Press or say 3 to take the latest survey</p>
-    <input class="myInput" type="text" id="lantext" name="todo"/>
-    <input type="submit" value="Submit"/>
-</form>
-{% endblock %}
+.w3-bar .w3-button {
+  padding: 16px;
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+      <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+      <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-user-plus"></i> Sign In / Register</a>
+      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
+  <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+  <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
+  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+</nav>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-left w3-text-white" style="padding:48px">
+    <span class="w3-jumbo w3-hide-small">Start something that matters</span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+    <span class="w3-large">Stop wasting valuable time with projects that just isn't you.</span>
+    <p><a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Learn more and start today</a></p>
+  </div> 
+  <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+</header>
+
+<!-- About Section -->
+<div class="w3-container" style="padding:128px 16px" id="about">
+  <h3 class="w3-center">ABOUT THE COMPANY</h3>
+  <p class="w3-center w3-large">Key features of our company</p>
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+    <div class="w3-quarter">
+      <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+      <p class="w3-large">Chatbot</p>
+      <p>A simple chatbot to help even the illiterate to use the site.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-comments-o w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Feedback System</p>
+      <p>Real time communication and feedback between refugees and refugee camps.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-question w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Survey System</p>
+      <p>An easier way for refugees to get the latest surveys and respond to them.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-newspaper-o w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">News and Community posts</p>
+      <p>Making it easier for camps and refugees to get information on what's happening within the camp and other camps. Camps can share ideas here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Promo Section - "We know design" -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px">
+  <div class="w3-row-padding">
+    <div class="w3-col m6">
+      <h3>We know design.</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore.</p>
+      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-th"> </i> View Our Works</a></p>
+    </div>
+    <div class="w3-col m6">
+      <img class="w3-image w3-round-large" src="/w3images/phone_buildings.jpg" alt="Buildings" width="700" height="394">
+    </div>
+  </div>
+</div>
+
+<!-- Team Section -->
+<div class="w3-container" style="padding:128px 16px" id="team">
+  <h3 class="w3-center">THE TEAM</h3>
+  <p class="w3-center w3-large">The ones who runs this company</p>
+  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="https://cdn2.vectorstock.com/i/1000x1000/01/66/businesswoman-character-avatar-icon-vector-12800166.jpg" alt="Blessing" style="width:100%">
+        <div class="w3-container">
+          <h3>Blessing Oludele</h3>
+          <p class="w3-opacity">Research and Design</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="https://st3.depositphotos.com/1007566/13129/v/1600/depositphotos_131295694-stock-illustration-businesswoman-character-avatar-icon.jpg" alt="Cherry" style="width:100%">
+        <div class="w3-container">
+          <h3>Cherry D</h3>
+          <p class="w3-opacity">Project Manager</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="https://st3.depositphotos.com/1007566/13129/v/1600/depositphotos_131295836-stock-illustration-businessman-character-avatar-icon.jpg" alt="Fahim" style="width:100%">
+        <div class="w3-container">
+          <h3>Fahim Rahman</h3>
+          <p class="w3-opacity">Ethics and Research</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQeaEvHPapB9yczIohW3T0KmC1oVFFWmck8Mw&usqp=CAU" alt="Trevor" style="width:100%">
+        <div class="w3-container">
+          <h3>Trevor Wendo</h3>
+          <p class="w3-opacity">Developer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Promo Section "Statistics" -->
+<div class="w3-container w3-row w3-center w3-dark-grey w3-padding-64">
+  <div class="w3-quarter">
+    <span class="w3-xxlarge">14+</span>
+    <br>Partners
+  </div>
+  <div class="w3-quarter">
+    <span class="w3-xxlarge">55+</span>
+    <br>Projects Done
+  </div>
+  <div class="w3-quarter">
+    <span class="w3-xxlarge">89+</span>
+    <br>Happy Clients
+  </div>
+  <div class="w3-quarter">
+    <span class="w3-xxlarge">150+</span>
+    <br>Meetings
+  </div>
+</div>
+
+<!-- Work Section -->
+<div class="w3-container" style="padding:128px 16px" id="work">
+  <h3 class="w3-center">OUR WORK</h3>
+  <p class="w3-center w3-large">What we've done for people</p>
+
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-col l3 m6">
+      <img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2017/10/E_SDG-goals_Goal-02.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A microphone">
+    </div>
+    <div class="w3-col l3 m6">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAilBMVEUnm0j///8AkzMAlDYdmUIgmUQAkzEVlz4AlDUPljtxtYHy9/MAkCkIlTn9/fvt9O3S5NPm8OZqsXi72L/c6t2ax6FAolldrXBMpmBVqWdttH6OwZey1Le11r0xnUzV59fF3ch9uomEvY+kzauUxZ2jzKrJ4Mxkr3Q5n1EAjiCXxqCBvIwAjBhAoVUd6jppAAAQGElEQVR4nO1diXrivA7N5pgADkuA0rIEKEs7/Xn/17uWZGd1OkBhSHNz5ps2JSH4xLZ0JC9YVosWLVq0aNGiRYsWLVq0aNHi/wWMPbsEDwTjrmN9fDBf8O+v87hXPrT0IUMkF+Mh/mQscyr/Oz2Vuf7uEOvDxAaEw4XrVV/Xme0W44Anh3RtYG0XXRbIozngww2IgDxeW2wmX2FzwgwKf5YHSIJ+q1Pz9Tr5+/4E/aWdInwTVdd5MV6x5fow7MpD5x1ffXesQN1i2YGrHXn05rkj2z70B3Ri4lqWC8/yzCz2Kn/7lqc/d/eGf1vy5+zetdiZ2Dksgr9cN2OOPnxlfKoOp1wztCN4SE5o22MPCE37o5ShH8JD8soMx/KJPYZhZ2MX8Gr8BCzSoSsLu3RfgFFX1sxRuPLw+HaUPx1guJxC7a7LDDfT6WEniX1ghXPNkB2m8r2DP4fXhzFkL0WC9sg3XQiVNekHJ9se+gfbjvsCy4QF5T48mI78MRf9nm1/eSWGiw4He+Rt4ROGQjO0uPMH7sv526MYusMSQ3MlBrK3bgQ8kGEfDgMqIxUM2t7YwbciJ15mSFaaY6/t+QlDenKu5T2Moe48o+68q3vXu8lnAMNjjiHUvgMFc5DhW8rwUMlQDO1Qtm7r3zH0xkQq7HDm+crmDU3mlBharNPhwaUMT9xPGAoPCu707NERqBsZ9j3v7gz5nkgthfowrM9OJUMu4V3McHF6GSmG76cxuDvJ4LiEZmxk+DIe351hoHzhDhqR16U/ek4VQ39xmB6+nEsZErS3kI0fmsz7Dpu7gaHCYxhuQZ7oJlvN8BPacXxxPywxBDpfktvA+ecMu1cwvNzSTLtvupUuu1tpooV0vq/Q14x1GL5tt89m6Fq7axiegoKl6cijPnjMF260NPz+luZKhoJ//chbSN8ULhayIeyDf+UtguiafrgRHjJcJR7f6ZYYxtUM8S2IyP1nHj8LbUtBIZcAauToguqiOnSpJ52gcVl9aJKg2l49aJeLCoZ8oRmO/Kcw7KgmuzRFF57sgSH73IAu/cJDWZMjh8nr3z7h0XgCGAZbm2RfkWEgQ1shW8z+PIOriaGMd/8VQ/DkUB+IuTm4gFOh/Dd0AzqEmkFd2wML6ybR0wDqxhA9xZ8TqGUG5mSuGuyk/28Yrvf7xUFr8MjUSLX8CTdS1GnnNXQstu5R310zzTDEIkKv1AwHmqH8EVCMuJtrhofUHz6OIUVtChOTZgO43eHoONtFe+m5z8vJ5LgFi8T4IZ7E04BZ3gqw3AksIV+tIgiQV9GbeMczqz8sWkEP4IdVtD1H+NpUdKPVFOJF+bc8F62ij/sTzDIMp8boEOEJVzAPEzUscF2hUjpcHpIvQOhEjzyUVDm8wOkMtwLK8uCL+jUvUHcMAnrXAwhmGS7n5jb6y5FrpVFVK/3NyDGU3uDZ5XkEdhJLHQ3svsmZ/lp4nscF7ynBYVJtz8Md0+CBzn1W1aG0mi5+Gv2Wf1rMBfgqVe65LsfX5dnADeR/RAAvoRWVl6cpEjzrdzy6IcCzBLxXwBHcDG7pz06v4gcGlhOofEqX2i/mhxZs1Lk1KjMI9oTSQZMT3CJYgeQDNT9nnYEd/qfEzKi/Aa2ukom6hTjUZEZfAh094NCXP7rwY+vxJdyGj/Gq5c0Wnu8JSFHHFhRLlQHRnY2XwmcGyDBJt449UtZHAdHF1vMl7U+d7O5L0lFAzzDUhsxRUgfGCRKGoWK4ESD1Z56+/+H7MaNq+OoGfo7h1swQL8aUvQ3iM2G4ikLqvHCDkQsln3IuLwWG8SqKDn4Vw2HUQxUFN5boJgxtBxl2YsiIbzBEezxDhlISE3FwMHMVw/DTndmQA7XYGQiAIsX47wCSe+dLzSKqGH71X/EV+RYmpNLxE4ZvLjDEZLqA5MmtWu4ahhA/qUux3fiaoWN1VAeF23HopRNf9rhdEhhWMtxBAyWGH9D5U4aRDwzhxBoHrM43GtRrGEKU36PYCivzM2UoFEMo9AyMT6//R77iX8BwXcEw/ASGa2I4uj3iuIahfJJhRKlVvMqLSgzByIyxqiGathxkyL5jKBKGa3B7KUP7NWVonWez2/hdx1B++mhPGQBZg7LsZYbgKHbvNtTkUbIE47u3PtYlhlJgeAwY7tcrCJ6B4Xn9kTKELPlBM2Se9md3Y2j0Fkx+2kZeEbvAUEq84arEkMtSvUe2rL/uxB44LnmLZdHSeG/d7vZFD5OM1kx5ixPTDI8jezDVDOdbefn6RobK65KK4Ttbf5LhUijd+1rnGlZQ5hJD8OjRxJbP4U/PHooqhh34VEovQ5/t8hLD4QFvjwwtzF/d2g9dNaK2A1nk6zyG8W7gn7Y+mQT58V00OwWGkH+LB/Z6BMVbBS4O/h7GrJLhsnvAO4JtPrzPEobxHG+fYXirLQWdhZZr5ot+kuszhk9C8p+B/UcJEpE5KDCEsSVZsM+jjV4fGO46nBX7odfdbrcnHy0N+kwORAJ5oWY4+Q8bF7XSj3nvdoaJFLUnRy2izOOH2KDHJ2ks3wNkODQxxIkIg/472Su3ylsklmaHuaoFtwveAnVeYmn8HzC03GSIKIVZlibTJtD0Rf7CxBCl69DHDv3KKhnSI/uOoT9OGeLDvZmhHiLNYGJspJ7OpsIoPMrTDEMUV1AEAbMylpiytwPrAobcMTN00crPPGT4ozq0/MJ0GjtcG+/FpUjZvHW38gq0NAIn1SDD//o7JGSpkZ4FyG4gjv2w7zgCGK4+HScA+/Sf/K0ZbvvwoLAfct9xeMoQdD3pUrrmdoZWJz8bY2QmiEN/XwKCIhkoAUMcE8fYohcmnRdHJk7YcaREB4ZhLwxj6FXywO6+4eUh1CcyDNGgoC0NJf70E4YYSs5caBOT8GcMLf8rsTH2YOFX3ElGtNAQoaMdOE48OduZ+LBHV6FoIPV2FJabxIdqWtJWJcs3wsrEh++iFAFPXJwlMvdm+Hr0w0y458wWy+gYLXczp1Id8eEwhgzFIY4PfBJPuazV4YS/ToYSxz+BKsBHPJSWiO/jWIbKwSqGs/HSn9LB6YV+YzwbbOB4GJ2kSMK7DOMv/ziMXzpxvJRvXsbx2fLmcdhbWnH8w0w444EQAfe+e06CMiyYcaGsS0B5GqFz3ghKxPDkCgDHDA8kd5h+wdJnRZDL0wSUp+F0Dyia8J2AuY3MU7do0aJFixYtWrRo0aJFixYNQeA+ZA5bfeBFo6jJK3MxH1eRfW4I1pgnfGniDDOCmtUeN7cS9cJH84rVJkCoNPewXtME74d04NK8MuD3Q0Sa4bGh6Wy/l4wGPXCNzBORroCCBUbPLs0jQGu6B9RUP5pYiQ6OLK7I60eVG1X8XjCi9uYf8fezi/MAqPkRPk1ZpZXkzQKqbhj6V5MImtcRSdDsuLapxhWPvxm0/wd2PzXZ5ebJlTUFzpWxJ6BI1USkm6fi1xQ4+02xokoMm+X1Vecjya2m7U4bVYkcV1T3VOzro/O/eT1FLUGcVsp+KrOzaFAlqtWOY52hofnevQalM5SgSWwL7ERhqw1kmgESNMdUqVGsOGhOJfJilam0W8V6st8HZVmyUtRpViVmBI2G6pkVyx5/HbKCRoPm05u3wnsyuCuujHzUJn/59JPaZWxcv0oUu0n8cp2Vp12Nin2OwinjxjhPBRmN6+aYk39fFQLC4L2eQRSV9irRXBQ0GuRC6rZhhYrtomsCdFi2YRtWVqFP3NetDp3h9b2nJGg0gvliXrdcBqO1EOatwapAGxGZdt5gvHb5qGRw5Yo6VIKmfl7BCKYIXjM+pgRN3SyKGbDm175WMtN+kb8kZZHZ3PLiAhsFTV2RLIu+xl2YBU1N4acL3i53F/Sm35HhVknAzVXuQvmXU6nfllptDb7GoEP7zp+xyJfWCYUQhcQhE741W2eXBTLROZ9F57nmSNXGu2N2F1WrNDG/vckJGudlAyZrtEuWdooZtozR9PatIu4A5e0ZJZEKwbkXnD6M1UrLwb8yV3tWskZ3NKOdpDJfZLB9YjRFZY0E7cmQdxeYtP9jeP7eV1HQeLPsYvmuC5RHmVcOT8uE00QD6deoLvPuggymYaeOkqBhVn43gL3D5/lXnpYJJ28fd5SwybkL5SgNaSW/KGj82M5jOi+88Kx5GoqEDGNJSecy8mq7lPKIoAon05RAZg/vSjxpxhS1Q5AmaqAsw0ZvXb8phYAlQVP87hAj/gmhIpS3p53q8TDjLrgqWXlz/rKguYDgc3qi8vZIoeguRGLri+JTC5q0kW4vYVhuC4+HmgRD34JRcBdqKlChXhFK0KTElUH+C0ZP6Ija22f+SNyFm0yqLEWNJUETRCZGRVyVI7kX8JPVZLS8u9Cpm7SOU3hF3qKuDAPt7ancWyyGansq+4az1Qr5NLVjX9bqLk2MijB+nchjoby9erTKXQTZPzaozgb5ouHePDltkImhv4Eh8fgT8I7zN/SpXEmMR96BzIqa4LQmonkTQVFIVq7mdy+uwn2zxGIx6P0VWIWp3yYJQ9+tQBpl6RLr3DoD5UNzYxwXefz7fnFQ9+8fqJCOUWfchUpsMOUkc2lfU4bmks+77+zay8w3IBOmp+5C9atDgFu7FdIxxgxNSXmXcV/hfZkLRhaZaQaJu6CB3FDoChtmOqJSCcUNiplhL7UcxnfWbHz0lw9UGGWqInEXSnKDjiTPkPVkxgxNMQIuY3d3yea8dC/AS7agykMIRuYFPWM54lCCppTb8M7fUdw9QLEx7wLkm5qLhZm75L9Js9AIU6ZNsszJiyk+guAtIHfRJQ5qOgVtVJYGPsoIGb/dpbKhLmpCULmLPdlhtWCSBEw6WE9/x8YiV9VibQgqd0GCVK+XJKucMiJBUyFPzLVYH4KZUbY0Jiykb5SgqcoqmSjWiGA2VN9osa2iKH0J7QNbPeWp3FDrRFA783wlkYHV8pxUnPGrMQlFirUimK53zS7uoZVbquNVCJos8g21ZgTTxZIZb0fpbZXcoJ4afjsumq3FuhFM9pM+ZNxdLrnhGIacSkhrsXYEdb4ltyiEAiNdbXj+b/MZNMX6EdTuIpe6VfE7mp5vBE0O1FBrSFC5i8L0A/Lxb7g3KaoBs6DJ3+hcT4KymYIKLcw2xG2vKfTv2Bm7+i28+b6WBGXJpsvXAgHqnGBdVPbmomEyVtupRLw0645CXkh2KkHTqHVNACVF/QsEza8FMjwzJWgauIUJDWl3PfIlTVq3pUFK58DJqDZxUwFKvh5dGlBsynKYLGilz0h9LUgDq9BiNPPiPxQ0w5o68p+BRkQ/ypq1MSA/SFnUW7/KqN5w02GX5gkaRJAOYjdR0FjZL1JvoqABpFtBNVHQIPT8r+uWfv0mJLP5myhoEEJPcG6ioEFoY9pMQQNQs6AaKmgAekCjmYIGIZosaBCdQYMFDYKC4KbuT4pgE9veN9XdE1wraHAbbdGiRYsWLVq0aNGiRYsWLVq0aNGiRYsWLVq0aNGiRYsWLW7D/wCfwQxRO7yo/AAAAABJRU5ErkJggg==" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A phone">
+    </div>
+    <div class="w3-col l3 m6">
+      <img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2017/10/E_SDG-goals_Goal-06.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="A drone">
+    </div>
+    <div class="w3-col l3 m6">
+      <img src="https://globalsdgawards.com/wp-content/uploads/2018/05/E_SDG-goals_icons-individual-rgb-10.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Soundbox">
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright" title="Close Modal Image">×</span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image">
+    <p id="caption" class="w3-opacity w3-large"></p>
+  </div>
+</div>
+
+
+<!-- Contact Section -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
+  <h3 class="w3-center">CONTACT</h3>
+  <p class="w3-center w3-large">Lets get in touch. Send us a message:</p>
+  <div style="margin-top:48px">
+    <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Chicago, US</p>
+    <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
+    <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
+    <br>
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+      <p>
+        <button class="w3-button w3-black" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+    </form>
+    <!-- Image of location/map -->
+    <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;margin-top:48px">
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+ 
+<script>
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>

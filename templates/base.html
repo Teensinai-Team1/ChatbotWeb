@@ -1,26 +1,23 @@
 <head>
     <title>CampComm</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='css/main.css') }}">
 </head>
 
 <body>
-    <img src="static/Screenshot_2020-08-03_at_15.05.16.png" alt="Logo">
-    <audio src={{ sound }} id="narr"></audio>        
     {% block body %} {% endblock %}
     <script type="text/javascript" src="{{ url_for('static', filename=('js/main.js')) }}"></script>
-    <button id='btnGiveCommand'>&#127908;</button>
+    <!--<button id='btnGiveCommand'>&#127908;</button>
     <br><br>
     <span id='message'></span>
-    <br><br>
+    <br><br>-->
     
     
     
     <script>
-        {% if voice%}
-        window.onload = function(){
-            document.getElementById("narr").play();
-        }
-        {% endif %}
+    
         var message = document.querySelector('#message');
 
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
