@@ -9,16 +9,13 @@ def landing():
     sound = "static/welcome_audio.mp3"
     return render_template('index.html', sound=sound, voice=voice)
 
-@app.route('/home')
+@app.route('/community')
 def home():
-    sound = "static/pronewsur.mp3"
-    return render_template('home.html', sound=sound, voice=voice)
+    return render_template('comm.html')
 
-@app.route('/news')
+@app.route('/home')
 def news():
-    if voice == True:
-        pass
-    return render_template("news.html", sound=sound, voice=voice)
+    return render_template("home.html")
 
 @app.route('/report')
 def report():
