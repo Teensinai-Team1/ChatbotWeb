@@ -7,12 +7,15 @@ import random
 import string
 import warnings
 import os
-import speech_recognition as sr
-from playsound import playsound
-from gtts import gTTS
+# import speech_recognition as sr
+# from playsound import playsound
+# from gtts import gTTS
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 warnings.filterwarnings("ignore")
+
+f = open('questions.txt')
+questions = f.read().replace("\u2028", "").split("\n")
 
 #News Database
 f = open('details.txt')
@@ -64,23 +67,44 @@ def respond(user_input):
     
 #Input from mic here
 
+asked = []
+replies = []
+
+def ask_me():
+    asked.append(random.choice(questions))
+    return asked[-1]
 
 #Program
-
 def recenews(user_input):
-        if user_input != "bye":
-            if user_input == "thanks" or user_input == "thank you":
-                running = False
-                return """Bot: You're welcome"""
-            
-            else:
-                if greeting(user_input) != None:
-                    return "Chatbot: "+ greeting(user_input)
-                else:
-                    print("Chatbot: ", end="")
-                    res = respond(user_input)
-                    sent_tokens.remove(user_input)
-                    return res
-        else:
+
+    print(asked)
+
+    if user_input != "bye":
+        if user_input == "thanks" or user_input == "thank you":
             running = False
-            print("Chatbot: Bye, have a nice day.")
+            return """Bot: You're welcome"""
+        
+        else:
+            if greeting(user_input) != None:
+
+                response = "Chatbot: " + greeting(user_input)
+                response += "\n"
+                response += "Chatbot: Please ask a question, or reply 'ask me' to take a survey."
+
+                return response
+            elif user_input == "ask me":
+
+                response = ask_me()
+                return response
+
+            else:
+                if len(asked) != len(replies):
+                    replies.append(user_input)
+                    response = "Thank you for your reply"
+                else:
+                    response = respond(user_input)
+                    sent_tokens.remove(user_input)
+                return response
+    else:
+        running = False
+        print("Chatbot: Bye, have a nice day.")
