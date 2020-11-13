@@ -1,53 +1,89 @@
 from flask import Flask
 from flask import render_template, request, redirect
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm 
+from wtforms import StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Email, Length
+from flask_sqlalchemy  import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+import random
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'fourwordsalluppercase!'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+bootstrap = Bootstrap(app)
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(15), unique=True)
+    email = db.Column(db.String(50), unique=True)
+    password = db.Column(db.String(80))
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('remember me')
+
+class RegisterForm(FlaskForm):
+    #email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+
+
 
 voice = True
 
 @app.route('/')
-def landing():
-    sound = "static/welcome_audio.mp3"
-    return render_template('index.html', sound=sound, voice=voice)
+def home():
+  return render_template('index.html')
 
 @app.route('/community')
-def home():
-    return render_template('comm.html')
+def comm():
+  return render_template('comm.html')
 
-@app.route('/home')
-def news():
-    return render_template("home.html")
+@app.route('/forms')
+def forms():
+  logging = LoginForm()
+  signing = RegisterForm()
 
-@app.route('/report')
-def report():
-    return render_template('report.html', sound=sound, voice=voice)
+  return render_template('forms.html', logging=logging, signing=signing)
 
-@app.route('/survey')
-def survey():
-    if voice == True:
-        pass
-    return render_template('survey.html', sound=sound, voice=voice)
+@app.route('/login-query', methods=['GET', 'POST'])
+def login_query():
 
-@app.route('/vot')
-def vot():
-    sound = "static/voice_or_text.mp3"
-    return render_template('vot.html', sound=sound, voice=voice)
+  if logging.validate_on_submit():
+      user = User.query.filter_by(username=form.username.data).first()
+      if user:
+          if check_password_hash(user.password, form.password.data):
+              login_user(user, remember=form.remember.data)
+              return redirect(url_for('dashboard'))
 
-@app.route("/home-query")
-def home_query():
-    answer = request.args.get('todo') 
-    if answer == "1":
-        return redirect("/report")
-    elif answer == "2":
-        return redirect("/news")
-    elif answer == "3":
-        return redirect("/survey")
+      return '<h1>Invalid username or password</h1>'
 
-@app.route('/language-query')
-def language_query():
-    answer = request.args.get('ling')
-    if answer == "1":
-        return redirect("/vot")
-    return "Not Understood"
+  return redirect(url_for("user"))
+
+@app.route('/signup-query', methods=['GET', 'POST'])
+def signup():
+  if signing.validate_on_submit():
+      hashed_password = generate_password_hash(signing.password.data, method='sha256')
+      new_user = User(username=signing.username.data, email=signing.email.data, password=hashed_password)
+      db.session.add(new_user)
+      db.session.commit()
+
+      return '<h1>New user has been created!</h1>'
+
+  return redirect(url_for("forms"))
+
+
 
 @app.route('/news-query')
 def news_query():
@@ -60,29 +96,22 @@ def news_query():
         os.remove("news_answer.mp3")
     return render_template("news.html", message=info)
 
-@app.route('/vot-query')
-def vot_query():
-    global voice
-    voice = True
-    answer = request.args.get('vot')
-    if answer == "1":
-        return redirect("/home")
-    elif answer == "2":
-        voice = False
-        return redirect("/home")
-    else:
-        return "Sorry I don't understand"
 
-@app.route('/report-query')
-def report_query():
-    # WARNING: NOT SECURE!!!
-    answer = request.args.get('answer')
-    return f'Thank you for your report that "{answer}"'
 
-@app.route('/survey-query')
-def survey_query():
-    # WARNING: NOT SECURE!!!
-    return redirect("/home")
+@app.route('/dashboard')
+#@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+  app.debug = True
+  app.run( # Starts the site
+		host='0.0.0.0',  # EStablishes the host, required for repl to detect the site
+		port=random.randint(2000, 9000)  # Randomly select the port the machine hosts on.
+	)
