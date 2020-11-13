@@ -70,6 +70,15 @@ def respond(user_input):
 asked = []
 replies = []
 
+def summary():
+
+    response = ""
+    for question, reply in list(zip(asked, replies)):
+        response += "Q: " + question + "\n"
+        response += "A: " + reply
+    return response
+
+
 def ask_me():
 
     # check if someone has asked twice
