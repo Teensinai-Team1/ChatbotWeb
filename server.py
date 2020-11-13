@@ -8,6 +8,7 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import random
+import Chatbot
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'fourwordsalluppercase!'
@@ -108,6 +109,21 @@ def dashboard():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/chat')
+def chat():
+    if 'message' in request.args:
+        message = request.args['message']
+
+        return Chatbot.message(message)
+    else:
+        return "Error: No message."
+
+@app.route('/summary')
+def summary():
+    
+    return Chatbot.summary()
+
 
 if __name__ == '__main__':
   app.debug = True
