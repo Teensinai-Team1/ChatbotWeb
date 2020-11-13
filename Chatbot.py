@@ -71,13 +71,27 @@ asked = []
 replies = []
 
 def ask_me():
-    asked.append(random.choice(questions))
-    return asked[-1]
+
+    # check if someone has asked twice
+    if len(asked) != len(replies):
+        asked.pop()
+
+    # build a list of questions we didn't ask yet
+    options = []
+    for question in questions:
+        if question not in asked:
+            options.append(question)
+
+    # if there's questions we didn't ask, pick one
+    if options:
+        choice = random.choice(options)
+        asked.append(choice)
+        return choice
+    else:
+        return "I don't have any other questions."
 
 #Program
-def recenews(user_input):
-
-    print(asked)
+def message(user_input):
 
     if user_input != "bye":
         if user_input == "thanks" or user_input == "thank you":
